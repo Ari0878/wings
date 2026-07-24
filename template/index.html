@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ nombre_negocio }} — Menú</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@500;700;900&family=DM+Sans:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/vendedor" class="acceso-discreto" title="Acceso vendedor">
+    <i data-lucide="store" class="icon"></i>
+  </a>
+  <!-- <img src="{{ url_for('static', filename='img/logo.png') }}" alt="{{ nombre_negocio }}" class="logo-marca"> -->
+  <div class="eyebrow">Pide y pasa por tu antojo</div>
+  <h1>{{ nombre_negocio }}</h1>
+  <p>Elige tus antojitos, arma tu pedido y te avisamos cuándo estará listo</p>
+</header>
+
+<main class="wrap">
+  <div id="menu-contenedor">
+    <p style="text-align:center; color: var(--paper-dim);">Cargando menú...</p>
+  </div>
+</main>
+
+<button class="btn-carrito-flotante" id="btn-abrir-carrito">
+  <i data-lucide="ticket" class="icon"></i> Ver pedido <span class="badge" id="badge-carrito">0</span>
+</button>
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="ticket" id="ticket">
+  <div class="ticket-header">
+    <h3>Tu pedido</h3>
+    <button class="cerrar-ticket" id="btn-cerrar-ticket"><i data-lucide="x" class="icon"></i></button>
+  </div>
+
+  <div class="ticket-items" id="ticket-items">
+    <p class="ticket-vacio"><i data-lucide="shopping-cart" class="icon"></i> Aún no agregas nada</p>
+  </div>
+
+  <div class="ticket-footer">
+    <div class="ticket-total">
+      <span>Total</span>
+      <span id="ticket-total-valor">$0.00</span>
+    </div>
+
+    <label for="input-nombre">Tu nombre *</label>
+    <input type="text" id="input-nombre" placeholder="¿Cómo te llamas?">
+
+    <label for="input-telefono">Tu WhatsApp (opcional, para avisarte)</label>
+    <input type="text" id="input-telefono" placeholder="10 dígitos">
+
+    <label for="input-forma-pago">Forma de pago *</label>
+    <select id="input-forma-pago">
+      <option value="">Selecciona...</option>
+      <option value="efectivo">Efectivo</option>
+      <option value="tarjeta">Tarjeta</option>
+    </select>
+
+    <label for="input-notas">Notas del pedido (opcional)</label>
+    <textarea id="input-notas" placeholder="Ej. sin cebolla, extra picoso..."></textarea>
+
+    <p class="mensaje-error" id="mensaje-error"></p>
+
+    <button class="btn-confirmar" id="btn-confirmar">Confirmar pedido</button>
+  </div>
+</aside>
+
+<div class="pantalla-confirmacion" id="pantalla-confirmacion">
+  <div class="tarjeta-confirmacion">
+    <i data-lucide="check-circle" class="icon icon-lg"></i>
+    <h3>¡Pedido enviado!</h3>
+    <p>Toca el botón para confirmarlo por WhatsApp con nosotros. En cuanto lo veamos te diremos en cuánto tiempo puedes pasar por él.</p>
+    <a href="#" target="_blank" class="btn-whatsapp" id="link-whatsapp">
+      <i data-lucide="message-circle" class="icon"></i> Enviar por WhatsApp
+    </a>
+    <button class="link-cerrar-confirmacion" id="btn-cerrar-confirmacion">Cerrar</button>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+</html>

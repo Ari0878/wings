@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ nombre_negocio }} — Acceso</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@500;700;900&family=DM+Sans:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<main class="acceso-wrap">
+  <div class="acceso-card">
+    <!-- <img src="{{ url_for('static', filename='img/logo.png') }}" alt="{{ nombre_negocio }}" class="logo-marca logo-marca-chica"> -->
+    <div class="eyebrow">Área interna</div>
+    <h1><i data-lucide="lock" class="icon"></i> Acceso vendedor</h1>
+    <p>Ingresa el código de acceso para entrar al panel.</p>
+
+    {% if error %}
+      <p class="acceso-error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('auth.acceso') }}">
+      <input type="hidden" name="next" value="{{ next }}">
+      <input
+        type="password"
+        name="codigo"
+        inputmode="numeric"
+        placeholder="Código de acceso"
+        autofocus
+        required
+      >
+      <button type="submit" class="btn-primary">Entrar</button>
+    </form>
+
+    <a href="/" class="volver-menu">
+      <i data-lucide="arrow-left" class="icon"></i> Regresar al menú
+    </a>
+  </div>
+</main>
+
+<script>if (window.lucide) lucide.createIcons();</script>
+</body>
+</html> 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ nombre_negocio }} — Panel del vendedor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@500;700;900&family=DM+Sans:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <!-- <img src="{{ url_for('static', filename='img/logo.png') }}" alt="{{ nombre_negocio }}" class="logo-marca logo-marca-chica"> -->
+  <div class="eyebrow">Panel interno</div>
+  <h1>Pedidos</h1>
+  <p>Aquí ves los pedidos en cuanto entran. Actualiza el tiempo y avisa por WhatsApp.</p>
+  <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+    <a href="/admin/productos" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+      <i data-lucide="package" class="icon"></i> Administrar Productos
+    </a>
+    <a href="/salir" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; color: var(--paper-dim); font-size: 0.9rem;">
+      <i data-lucide="log-out" class="icon"></i> Salir
+    </a>
+  </div>
+</header>
+
+<main class="panel-vendedor">
+  <div class="filtros-vendedor" id="filtros"></div>
+  <div id="lista-pedidos">
+    <p class="sin-pedidos">Cargando pedidos...</p>
+  </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/vendedor.js') }}"></script>
+</body>
+</html>

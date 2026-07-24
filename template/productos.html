@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ nombre_negocio }} — Administración de Productos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@500;700;900&family=DM+Sans:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <!-- <img src="{{ url_for('static', filename='img/logo.png') }}" alt="{{ nombre_negocio }}" class="logo-marca logo-marca-chica"> -->
+  <div class="eyebrow">Panel interno</div>
+  <h1>Administración de Productos</h1>
+  <p>Gestiona tu inventario, precios y disponibilidad</p>
+  <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+    <a href="/vendedor" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; color: var(--paper-dim); font-size: 0.9rem;">
+      <i data-lucide="arrow-left" class="icon"></i> Pedidos
+    </a>
+    <a href="/salir" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; color: var(--paper-dim); font-size: 0.9rem;">
+      <i data-lucide="log-out" class="icon"></i> Salir
+    </a>
+  </div>
+</header>
+
+<main class="panel-productos">
+  <div class="acciones-productos">
+    <button class="btn-primary" id="btn-nuevo-producto">
+      <i data-lucide="plus" class="icon"></i> Nuevo Producto
+    </button>
+  </div>
+
+  <div id="lista-productos">
+    <p class="sin-productos">Cargando productos...</p>
+  </div>
+</main>
+
+<div class="overlay" id="overlay-modal"></div>
+
+<div class="modal-producto" id="modal-producto">
+  <div class="modal-header">
+    <h3 id="modal-titulo">Nuevo Producto</h3>
+    <button class="btn-cerrar-modal" id="btn-cerrar-modal">
+      <i data-lucide="x" class="icon"></i>
+    </button>
+  </div>
+
+  <form id="form-producto" class="modal-body">
+    <input type="hidden" id="producto-id">
+
+    <label for="producto-nombre">Nombre *</label>
+    <input type="text" id="producto-nombre" required>
+
+    <label for="producto-categoria">Categoría *</label>
+    <input type="text" id="producto-categoria" required placeholder="Ej. Alitas, Bebidas, Postres">
+
+    <label for="producto-precio">Precio *</label>
+    <input type="number" id="producto-precio" step="0.01" min="0" required>
+
+    <label for="producto-inventario-categoria">Inventario de categoría (compartido entre todos los productos de esta categoría) *</label>
+    <input type="number" id="producto-inventario-categoria" min="0" required value="0">
+
+    <label for="producto-orden">Orden (para mostrar en el menú)</label>
+    <input type="number" id="producto-orden" min="0" value="0">
+
+    <label for="producto-descripcion">Descripción</label>
+    <textarea id="producto-descripcion" rows="3"></textarea>
+
+    <label for="producto-imagen">URL de imagen</label>
+    <input type="text" id="producto-imagen" placeholder="https://...">
+
+    <div class="modal-checkbox">
+      <input type="checkbox" id="producto-disponible" checked>
+      <label for="producto-disponible">Disponible para venta</label>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn-secondary" id="btn-cancelar">Cancelar</button>
+      <button type="submit" class="btn-primary">Guardar</button>
+    </div>
+  </form>
+</div>
+
+<script src="{{ url_for('static', filename='js/productos_admin.js') }}"></script>
+</body>
+</html>
