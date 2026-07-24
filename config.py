@@ -14,7 +14,7 @@ class Config:
     if os.getenv("USE_SQLITE", "0") == "1":
         SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, "wal.db")
     else:
-        SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URI")
+        SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
