@@ -16,10 +16,8 @@ def link_pedido_para_vendedor(numero_vendedor: str, pedido) -> str:
     lineas.append("*Detalle:*")
     for item in pedido.items:
         lineas.append(
-            f"- {item['cantidad']}x {item['nombre']} (${item['precio']:.2f} c/u)"
+            f"- {item['cantidad']}x {item['nombre']}"
         )
-    lineas.append("")
-    lineas.append(f"*Total: ${float(pedido.total):.2f}*")
     if pedido.notas:
         lineas.append(f"Notas: {pedido.notas}")
 

@@ -39,14 +39,11 @@ def crear_producto():
     
     nombre = (data.get("nombre") or "").strip()
     categoria = (data.get("categoria") or "").strip()
-    precio = data.get("precio")
     
     if not nombre:
         return jsonify({"error": "El nombre es obligatorio"}), 400
     if not categoria:
         return jsonify({"error": "La categoría es obligatoria"}), 400
-    if precio is None:
-        return jsonify({"error": "El precio es obligatorio"}), 400
     
     # Crear inventario de categoría si no existe
     cat_inv = CategoriaInventario.query.filter_by(categoria=categoria).first()
@@ -58,7 +55,6 @@ def crear_producto():
         nombre=nombre,
         categoria=categoria,
         descripcion=(data.get("descripcion") or "").strip() or None,
-        precio=precio,
         disponible=data.get("disponible", True),
         imagen_url=(data.get("imagen_url") or "").strip() or None,
         orden=data.get("orden", 0)
@@ -97,8 +93,6 @@ def actualizar_producto(producto_id):
         producto.categoria = data["categoria"].strip()
     if "descripcion" in data:
         producto.descripcion = (data["descripcion"] or "").strip() or None
-    if "precio" in data:
-        producto.precio = data["precio"]
     if "disponible" in data:
         producto.disponible = data["disponible"]
     if "imagen_url" in data:

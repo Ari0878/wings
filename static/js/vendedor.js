@@ -65,7 +65,7 @@ async function cargarPedidos() {
 
 function pedidoCardHTML(p) {
   const itemsHTML = p.items
-    .map((i) => `<div>${i.cantidad}x ${i.nombre} — $${(i.precio * i.cantidad).toFixed(2)}</div>`)
+    .map((i) => `<div>${i.cantidad}x ${i.nombre}</div>`)
     .join("");
 
   return `
@@ -80,7 +80,6 @@ function pedidoCardHTML(p) {
 
       <div class="items-lista">${itemsHTML}</div>
       ${p.notas ? `<div class="notas"><i data-lucide="sticky-note" class="icon"></i> ${p.notas}</div>` : ""}
-      <div class="total-linea">Total: $${p.total.toFixed(2)}</div>
 
       <div class="controles-pedido">
         <input type="text" placeholder="Tiempo (ej. 20 minutos)" value="${p.tiempo_estimado || ""}" id="tiempo-${p.id}">

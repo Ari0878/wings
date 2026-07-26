@@ -58,13 +58,10 @@ def crear_pedido():
                 "error": f"Por el momento no contamos con suficientes {categoria.lower()} para atender más pedidos. ¡Gracias por tu comprensión!"
             }), 400
 
-    total = sum(float(i["precio"]) * int(i["cantidad"]) for i in items)
-
     pedido = Pedido(
         cliente_nombre=nombre,
         cliente_telefono=(data.get("cliente_telefono") or "").strip() or None,
         notas=(data.get("notas") or "").strip() or None,
-        total=total,
         estado="pendiente",
         forma_pago=forma_pago,
     )

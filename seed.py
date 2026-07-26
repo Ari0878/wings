@@ -9,34 +9,34 @@ from models import Producto, CategoriaInventario
 
 PRODUCTOS = [
     # --- Alitas ---
-    {"nombre": "Alitas BBQ (6 pzas)", "categoria": "Alitas", "precio": 95, "descripcion": "Bañadas en salsa BBQ"},
-    {"nombre": "Alitas Picantes (6 pzas)", "categoria": "Alitas", "precio": 95, "descripcion": "Estilo  en salsa picosa"},
-    {"nombre": "Alitas Mango Habanero (6 pzas)", "categoria": "Alitas", "precio": 95, "descripcion": "Dulce picante"},
+    {"nombre": "Alitas BBQ (6 pzas)", "categoria": "Alitas", "descripcion": "Bañadas en salsa BBQ"},
+    {"nombre": "Alitas Picantes (6 pzas)", "categoria": "Alitas", "descripcion": "Estilo  en salsa picosa"},
+    {"nombre": "Alitas Mango Habanero (6 pzas)", "categoria": "Alitas", "descripcion": "Dulce picante"},
 
     # --- Gomiboing ---
-    {"nombre": "Gomiboing grande", "categoria": "Gomiboing", "precio": 55, "descripcion": "Gomitas con chamoy y chile, tamaño grande"},
+    {"nombre": "Gomiboing grande", "categoria": "Gomiboing", "descripcion": "Gomitas con chamoy y chile, tamaño grande"},
 
     # --- Vaquitas ---
-    {"nombre": "Vaquita loca", "categoria": "Vaquitas", "precio": 50, "descripcion": ""},
+    {"nombre": "Vaquita loca", "categoria": "Vaquitas", "descripcion": ""},
 
     # --- Manzanas locas ---
-    {"nombre": "Manzana loca", "categoria": "Manzanas Locas", "precio": 35, "descripcion": "Con chamoy y dulces"},
+    {"nombre": "Manzana loca", "categoria": "Manzanas Locas", "descripcion": "Con chamoy y dulces"},
 
 
     # --- Micheladas ---
-    {"nombre": "Michelada clásica", "categoria": "Micheladas", "precio": 60, "descripcion": ""},
-    {"nombre": "Michelada especial", "categoria": "Micheladas", "precio": 75, "descripcion": ""},
+    {"nombre": "Michelada clásica", "categoria": "Micheladas", "descripcion": ""},
+    {"nombre": "Michelada especial", "categoria": "Micheladas", "descripcion": ""},
 
     # --- Pitufos ---
-    {"nombre": "Pitufo", "categoria": "Pitufos", "precio": 30, "descripcion": ""},
+    {"nombre": "Pitufo", "categoria": "Pitufos", "descripcion": ""},
 
     # --- Lienternas ---
-    {"nombre": "Lienterna", "categoria": "Lienternas", "precio": 25, "descripcion": ""},
+    {"nombre": "Lienterna", "categoria": "Lienternas", "descripcion": ""},
 
 
     # --- Dorilocos ---
 
-    {"nombre": "Doriloco grande", "categoria": "Dorilocos", "precio": 60, "descripcion": "Doritos con toppings variados"},
+    {"nombre": "Doriloco grande", "categoria": "Dorilocos", "descripcion": "Doritos con toppings variados"},
 ]
 
 # Inventario por CATEGORÍA (compartido entre todos los productos de la misma categoría)

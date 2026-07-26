@@ -8,7 +8,7 @@ class Producto(db.Model):
     nombre = db.Column(db.String(120), nullable=False)
     categoria = db.Column(db.String(60), nullable=False)
     descripcion = db.Column(db.String(255), nullable=True)
-    precio = db.Column(db.Numeric(10, 2), nullable=False)
+    # precio = db.Column(db.Numeric(10, 2), nullable=False)
     disponible = db.Column(db.Boolean, default=True, nullable=False)
     imagen_url = db.Column(db.String(255), nullable=True)
     orden = db.Column(db.Integer, default=0)
@@ -19,7 +19,7 @@ class Producto(db.Model):
             "nombre": self.nombre,
             "categoria": self.categoria,
             "descripcion": self.descripcion,
-            "precio": float(self.precio),
+            # "precio": float(self.precio),
             "disponible": self.disponible,
             "imagen_url": self.imagen_url,
         }

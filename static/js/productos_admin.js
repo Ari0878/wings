@@ -75,10 +75,6 @@ function productoCardHTML(p) {
           <span class="valor">${p.categoria}</span>
         </div>
         <div class="info-row">
-          <span class="label">Precio:</span>
-          <span class="valor">$${p.precio.toFixed(2)}</span>
-        </div>
-        <div class="info-row">
           <span class="label">Inventario (${p.categoria}):</span>
           <span class="valor">${inventarioTexto}</span>
         </div>
@@ -129,7 +125,6 @@ formProducto.addEventListener("submit", async (e) => {
   const payload = {
     nombre: document.getElementById("producto-nombre").value.trim(),
     categoria: document.getElementById("producto-categoria").value.trim(),
-    precio: parseFloat(document.getElementById("producto-precio").value),
     inventario_categoria: parseInt(document.getElementById("producto-inventario-categoria").value),
     orden: parseInt(document.getElementById("producto-orden").value),
     descripcion: document.getElementById("producto-descripcion").value.trim() || null,
@@ -176,7 +171,6 @@ function editarProducto(id) {
   document.getElementById("producto-id").value = producto.id;
   document.getElementById("producto-nombre").value = producto.nombre;
   document.getElementById("producto-categoria").value = producto.categoria;
-  document.getElementById("producto-precio").value = producto.precio;
   document.getElementById("producto-inventario-categoria").value = producto.inventario_categoria || 0;
   document.getElementById("producto-orden").value = producto.orden;
   document.getElementById("producto-descripcion").value = producto.descripcion || "";
