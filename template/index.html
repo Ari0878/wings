@@ -33,6 +33,19 @@
 
 <div class="overlay" id="overlay"></div>
 
+<div class="modal-variantes" id="modal-variantes">
+  <div class="modal-header">
+    <h3 id="variantes-titulo">Selecciona opciones</h3>
+    <button class="btn-cerrar-modal" id="btn-cerrar-variantes"><i data-lucide="x" class="icon"></i></button>
+  </div>
+  <p class="variantes-instruccion">Toca una opción por cada grupo. La opción marcada es la que se agregará a tu pedido.</p>
+  <div class="modal-body" id="variantes-opciones"></div>
+  <div class="modal-footer">
+    <button class="btn-secondary" id="btn-cancelar-variantes">Cancelar</button>
+    <button class="btn-primary" id="btn-confirmar-variantes">Agregar al pedido</button>
+  </div>
+</div>
+
 <aside class="ticket" id="ticket">
   <div class="ticket-header">
     <h3>Tu pedido</h3>
@@ -61,9 +74,6 @@
       <option value="efectivo">Efectivo</option>
       <option value="tarjeta">Tarjeta</option>
     </select>
-
-    <label for="input-notas">Notas del pedido (opcional)</label>
-    <textarea id="input-notas" placeholder="Ej. sin cebolla, extra picoso..."></textarea>
 
     <p class="mensaje-error" id="mensaje-error"></p>
 

@@ -65,7 +65,13 @@ async function cargarPedidos() {
 
 function pedidoCardHTML(p) {
   const itemsHTML = p.items
-    .map((i) => `<div>${i.cantidad}x ${i.nombre}</div>`)
+    .map((i) => {
+      let variantesTexto = "";
+      if (i.variantes && Object.keys(i.variantes).length > 0) {
+        variantesTexto = " <small>(" + Object.entries(i.variantes).map(([k, v]) => `${k}: ${v}`).join(", ") + ")</small>";
+      }
+      return `<div>${i.cantidad}x ${i.nombre}${variantesTexto}</div>`;
+    })
     .join("");
 
   return `

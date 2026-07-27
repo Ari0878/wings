@@ -66,6 +66,28 @@
     <label for="producto-descripcion">Descripción</label>
     <textarea id="producto-descripcion" rows="3"></textarea>
 
+    <label>Opciones de selección (variantes)</label>
+<p class="ayuda-variantes">
+      El cliente elige tocando botones, nunca escribe texto libre.
+      Ej: grupo <strong>Sabor</strong> → Picosas, BBQ, Mango · grupo <strong>Salsa</strong> → Valentina, Botanera, Costeña.
+    </p>
+    <div id="variantes-container">
+      <div class="variante-grupo">
+        <div class="variante-campo">
+          <span class="campo-mini-label">Nombre del grupo</span>
+          <input type="text" class="variante-nombre" placeholder="Ej. Sabor, Salsa, Topping">
+        </div>
+        <div class="variante-campo">
+          <span class="campo-mini-label">Opciones (separadas por coma)</span>
+          <input type="text" class="variante-opciones" placeholder="Ej. Picosas, BBQ, Mango">
+        </div>
+        <button type="button" class="btn-eliminar-variante" title="Eliminar este grupo" onclick="eliminarVariante(this)"><i data-lucide="trash-2" class="icon"></i></button>
+      </div>
+    </div>
+    <button type="button" class="btn-secondary" id="btn-agregar-variante" style="margin-top: 8px;">
+      <i data-lucide="plus" class="icon"></i> Agregar grupo de opciones
+    </button>
+
     <label for="producto-imagen">URL de imagen</label>
     <input type="text" id="producto-imagen" placeholder="https://...">
 

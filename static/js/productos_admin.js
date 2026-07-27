@@ -79,6 +79,12 @@ function productoCardHTML(p) {
           <span class="valor">${inventarioTexto}</span>
         </div>
         ${p.descripcion ? `<div class="desc">${p.descripcion}</div>` : ""}
+        ${p.variantes && Object.keys(p.variantes).length > 0 ? `
+          <div class="variantes-preview">
+            ${Object.entries(p.variantes).map(([grupo, opciones]) =>
+              `<span class="chip-variante"><strong>${grupo}:</strong> ${opciones.join(", ")}</span>`
+            ).join("")}
+          </div>` : `<div class="sin-variantes">Sin opciones de selección — el cliente solo agrega el producto tal cual.</div>`}
       </div>
       <div class="card-footer">
         <button class="btn-editar" data-id="${p.id}">
@@ -107,10 +113,50 @@ function cerrarModal() {
   document.getElementById("producto-disponible").checked = true;
   document.getElementById("producto-inventario-categoria").value = "0";
   document.getElementById("producto-orden").value = "0";
+  
+  // Reset variantes
+  const variantesContainer = document.getElementById("variantes-container");
+  variantesContainer.innerHTML = "";
+  agregarGrupoVariante();
 }
 
 document.getElementById("btn-nuevo-producto").addEventListener("click", () => {
+  // Reset variantes
+  const variantesContainer = document.getElementById("variantes-container");
+  variantesContainer.innerHTML = "";
+  agregarGrupoVariante();
   abrirModal("Nuevo Producto");
+});
+
+// ---------- Gestión de variantes ----------
+function agregarGrupoVariante(nombre = "", opciones = "") {
+  const container = document.getElementById("variantes-container");
+  const div = document.createElement("div");
+  div.className = "variante-grupo";
+  div.innerHTML = `
+    <div class="variante-campo">
+      <span class="campo-mini-label">Nombre del grupo</span>
+      <input type="text" class="variante-nombre" placeholder="Ej. Sabor, Salsa, Topping" value="${nombre}">
+    </div>
+    <div class="variante-campo">
+      <span class="campo-mini-label">Opciones (separadas por coma)</span>
+      <input type="text" class="variante-opciones" placeholder="Ej. Picosas, BBQ, Mango" value="${opciones}">
+    </div>
+    <button type="button" class="btn-eliminar-variante" title="Eliminar este grupo" onclick="eliminarVariante(this)"><i data-lucide="trash-2" class="icon"></i></button>
+  `;
+  container.appendChild(div);
+  if (window.lucide) lucide.createIcons();
+}
+
+function eliminarVariante(btn) {
+  const container = document.getElementById("variantes-container");
+  if (container.children.length > 1) {
+    btn.parentElement.remove();
+  }
+}
+
+document.getElementById("btn-agregar-variante").addEventListener("click", () => {
+  agregarGrupoVariante();
 });
 
 document.getElementById("btn-cerrar-modal").addEventListener("click", cerrarModal);
@@ -122,6 +168,16 @@ formProducto.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const id = document.getElementById("producto-id").value;
+  // Recopilar variantes
+  const variantes = {};
+  document.querySelectorAll(".variante-grupo").forEach(grupo => {
+    const nombre = grupo.querySelector(".variante-nombre").value.trim();
+    const opcionesStr = grupo.querySelector(".variante-opciones").value.trim();
+    if (nombre && opcionesStr) {
+      variantes[nombre] = opcionesStr.split(",").map(o => o.trim()).filter(o => o);
+    }
+  });
+
   const payload = {
     nombre: document.getElementById("producto-nombre").value.trim(),
     categoria: document.getElementById("producto-categoria").value.trim(),
@@ -130,6 +186,7 @@ formProducto.addEventListener("submit", async (e) => {
     descripcion: document.getElementById("producto-descripcion").value.trim() || null,
     imagen_url: document.getElementById("producto-imagen").value.trim() || null,
     disponible: document.getElementById("producto-disponible").checked,
+    variantes: Object.keys(variantes).length > 0 ? variantes : null,
   };
 
   try {
@@ -177,11 +234,22 @@ function editarProducto(id) {
   document.getElementById("producto-imagen").value = producto.imagen_url || "";
   document.getElementById("producto-disponible").checked = producto.disponible;
 
+  // Cargar variantes
+  const variantesContainer = document.getElementById("variantes-container");
+  variantesContainer.innerHTML = "";
+  if (producto.variantes && Object.keys(producto.variantes).length > 0) {
+    for (const [nombre, opciones] of Object.entries(producto.variantes)) {
+      agregarGrupoVariante(nombre, opciones.join(", "));
+    }
+  } else {
+    agregarGrupoVariante();
+  }
+
   abrirModal("Editar Producto");
 }
 
 async function eliminarProducto(id) {
-  if (!confirm("¿Estás seguro de eliminarこの producto?")) return;
+  if (!confirm("¿Estás seguro de eliminar este producto?")) return;
 
   try {
     const res = await fetch(`/api/admin/productos/${id}`, {

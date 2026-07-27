@@ -1,4 +1,5 @@
 from extensions import db
+import json
 
 
 class Producto(db.Model):
@@ -12,6 +13,18 @@ class Producto(db.Model):
     disponible = db.Column(db.Boolean, default=True, nullable=False)
     imagen_url = db.Column(db.String(255), nullable=True)
     orden = db.Column(db.Integer, default=0)
+    variantes = db.Column(db.Text, nullable=True)  # JSON string con grupos de opciones
+
+    def get_variantes(self):
+        if self.variantes:
+            try:
+                return json.loads(self.variantes)
+            except:
+                return {}
+        return {}
+
+    def set_variantes(self, variantes_dict):
+        self.variantes = json.dumps(variantes_dict) if variantes_dict else None
 
     def to_dict(self, incluir_inventario=False):
         data = {
@@ -22,6 +35,7 @@ class Producto(db.Model):
             # "precio": float(self.precio),
             "disponible": self.disponible,
             "imagen_url": self.imagen_url,
+            "variantes": self.get_variantes(),
         }
         if incluir_inventario:
             data["inventario"] = self.inventario

@@ -60,6 +60,10 @@ def crear_producto():
         orden=data.get("orden", 0)
     )
     
+    variantes = data.get("variantes")
+    if variantes:
+        producto.set_variantes(variantes)
+    
     db.session.add(producto)
     db.session.commit()
     
@@ -99,6 +103,11 @@ def actualizar_producto(producto_id):
         producto.imagen_url = (data["imagen_url"] or "").strip() or None
     if "orden" in data:
         producto.orden = data["orden"]
+    if "variantes" in data:
+        if data["variantes"]:
+            producto.set_variantes(data["variantes"])
+        else:
+            producto.variantes = None
     
     # Manejar cambio de categoría
     if "categoria" in data and data["categoria"] != categoria_anterior:

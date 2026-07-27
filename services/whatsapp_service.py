@@ -15,9 +15,11 @@ def link_pedido_para_vendedor(numero_vendedor: str, pedido) -> str:
     lineas.append("")
     lineas.append("*Detalle:*")
     for item in pedido.items:
-        lineas.append(
-            f"- {item['cantidad']}x {item['nombre']}"
-        )
+        item_text = f"- {item['cantidad']}x {item['nombre']}"
+        if item.get('variantes') and item['variantes']:
+            variantes_text = " (" + ", ".join([f"{k}: {v}" for k, v in item['variantes'].items()]) + ")"
+            item_text += variantes_text
+        lineas.append(item_text)
     if pedido.notas:
         lineas.append(f"Notas: {pedido.notas}")
 
